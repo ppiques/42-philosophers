@@ -12,9 +12,15 @@
 
 #include "philosophers.h"
 
-int main(int argc, char **argv)
+int	main(int argc, const char **argv)
 {
-    if (check_args(argc, argv) == 1)
-        return (1);
-    return (0);
+	t_args	args;
+
+	if (check_args(argc, argv) == 1)
+		return (1);
+	if (global_args_init(argv, &args) == -1)
+		return (1);
+	printf("philo_nbr = %d\n", args.philo_nbr);
+	printf("time_to_die = %d\n", args.time_to_die);
+	return (0);
 }

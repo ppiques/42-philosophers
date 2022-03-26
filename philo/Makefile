@@ -26,7 +26,8 @@ BUILD = 	.objects
 vpath %.c $(SRCS_PATH)
 
 SRCS = philosophers.c check_args.c \
-ft_isdigit.c
+parsing.c \
+ft_isdigit.c ft_atoi.c
 
 cc = gcc
 
