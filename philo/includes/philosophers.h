@@ -21,7 +21,10 @@ typedef struct  s_philo
 {
 	pthread_t	thread_id;
 	int			philo_id;
-	t_args		*args;
+	int			right_fork;
+	int			left_fork;
+	int			last_meal;
+	struct t_args		*args;
 }				t_philo;
 
 typedef struct	s_args

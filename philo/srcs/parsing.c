@@ -6,14 +6,14 @@
 /*   By: ppiques <ppiques@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 15:22:29 by ppiques           #+#    #+#             */
-/*   Updated: 2022/03/26 18:52:26 by ppiques          ###   ########.fr       */
+/*   Updated: 2022/03/27 16:36:47 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 /*
-* This function initializes the rules of the program baed on the arguments
+* This function initializes the rules of the program based on the arguments given
 */
 
 int	global_args_init(const char **argv, t_args *args)
@@ -50,31 +50,38 @@ int	check_global_args(t_args *args)
 }
 
 /*
-* This function initializes the mutex used in args
+* This function initializes the mutex used in the args structure
 */
 
 int	mutex_init(t_args *args)
 {
 	int	i;
 
-	i = args->philo_nbr;
-	while (--i >= 0)
+	i = args->philo_nbr - 1;
+	while (i-- >= 0)
 		args->forks[i] = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	args->eating = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	args->thinking = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	return (0);
 }
 
+/*
+* This function initializes each individual philosopher
+*/
+
 int	philosophers_init(t_args *args)
 {
 	int	i;
 
-	i = args->philo_nbr;
-	while (--i >= 0)
+	i = args->philo_nbr - 1;
+	while (i >= 0)
 	{
 		args->philosophers[i].args = args;
 		args->philosophers[i].philo_id = i;
-
+		args->philosophers[i].right_fork = (i + 1) % args->philo_nbr;
+		args->philosophers[i].left_fork = i;
+		printf("last_meal = %d\n", args->philosophers[i].last_meal);
+		i--;
 	}
 	return (0);
 }
