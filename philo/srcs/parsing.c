@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppiques <ppiques@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ppiques <ppiques@students.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 15:22:29 by ppiques           #+#    #+#             */
-/*   Updated: 2022/03/27 16:36:47 by ppiques          ###   ########.fr       */
+/*   Updated: 2022/04/01 12:54:16 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	global_args_init(const char **argv, t_args *args)
 	if (argv[5])
 		args->optional = ft_atoi(argv[5]);
 	else
-		args->optional = 0;
+		args->optional = -1;
 	if (check_global_args(args) == -1)
 		return (-1);
 	mutex_init(args);
@@ -57,8 +57,8 @@ int	mutex_init(t_args *args)
 {
 	int	i;
 
-	i = args->philo_nbr - 1;
-	while (i-- >= 0)
+	i = 0;
+	while (i++ < args->philo_nbr)
 		args->forks[i] = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	args->eating = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	args->thinking = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
@@ -74,14 +74,14 @@ int	philosophers_init(t_args *args)
 	int	i;
 
 	i = args->philo_nbr - 1;
-	while (i >= 0)
+	while (i < args->philo_nbr)
 	{
 		args->philosophers[i].args = args;
 		args->philosophers[i].philo_id = i;
 		args->philosophers[i].right_fork = (i + 1) % args->philo_nbr;
 		args->philosophers[i].left_fork = i;
 		printf("last_meal = %d\n", args->philosophers[i].last_meal);
-		i--;
+		i++;
 	}
 	return (0);
 }
