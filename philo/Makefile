@@ -25,8 +25,8 @@ BUILD = 	.objects
 
 vpath %.c $(SRCS_PATH)
 
-SRCS = philosophers.c check_args.c \
-parsing.c \
+SRCS = philosophers.c  philosophing.c check_args.c \
+parsing.c timer.c actions.c cleaner.c \
 ft_isdigit.c ft_atoi.c
 
 cc = gcc
@@ -39,7 +39,7 @@ all :
 	@make $(NAME)
 
 $(NAME) : $(OBJS)
-		@cc $(CFLAGS) $(LIBS) $(OBJS) -o $(NAME)
+		@cc $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 		@echo "Executable successfully created\n"
 
 $(OBJ_DIR)/%.o : %.c | $(BUILD)

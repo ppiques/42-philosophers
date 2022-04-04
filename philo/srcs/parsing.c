@@ -6,7 +6,7 @@
 /*   By: ppiques <ppiques@students.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 15:22:29 by ppiques           #+#    #+#             */
-/*   Updated: 2022/04/01 12:54:16 by ppiques          ###   ########.fr       */
+/*   Updated: 2022/04/04 16:33:31 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ int	global_args_init(const char **argv, t_args *args)
 		args->optional = ft_atoi(argv[5]);
 	else
 		args->optional = -1;
+	args->death = 0;
+	args->full = 0;
 	if (check_global_args(args) == -1)
 		return (-1);
 	mutex_init(args);
+	philosophers_init(args);
 	return (0);
 }
 
@@ -41,7 +44,7 @@ int	check_global_args(t_args *args)
 {
 	if (args->philo_nbr <= 0 || args->time_to_die < 0
 		|| args->time_to_eat < 0 || args->time_to_sleep < 0
-		|| args->optional <= 0 || args->philo_nbr > 200)
+		|| args->optional == 0 || args->philo_nbr > 200)
 	{
 		printf("Error : Invalid arguments\n");
 		return (-1);
@@ -50,7 +53,7 @@ int	check_global_args(t_args *args)
 }
 
 /*
-* This function initializes the mutex used in the args structure
+* This function initializes the mutexes used in the args structure
 */
 
 int	mutex_init(t_args *args)
@@ -61,7 +64,7 @@ int	mutex_init(t_args *args)
 	while (i++ < args->philo_nbr)
 		args->forks[i] = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	args->eating = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
-	args->thinking = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+	args->printing = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	return (0);
 }
 
@@ -80,8 +83,9 @@ int	philosophers_init(t_args *args)
 		args->philosophers[i].philo_id = i;
 		args->philosophers[i].right_fork = (i + 1) % args->philo_nbr;
 		args->philosophers[i].left_fork = i;
-		printf("last_meal = %d\n", args->philosophers[i].last_meal);
-		i++;
+		args->philosophers[i].fed = 0;
+		args->philosophers[i].last_meal = 0;
+		i--;
 	}
 	return (0);
 }

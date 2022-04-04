@@ -20,7 +20,6 @@ int	main(int argc, const char **argv)
 		return (1);
 	if (global_args_init(argv, &args) == -1)
 		return (1);
-	printf("philo_nbr = %d\n", args.philo_nbr);
-	printf("time_to_die = %d\n", args.time_to_die);
+	philosophing(&args);
 	return (0);
 }
