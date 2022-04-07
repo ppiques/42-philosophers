@@ -6,7 +6,7 @@
 /*   By: ppiques <ppiques@students.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 15:22:29 by ppiques           #+#    #+#             */
-/*   Updated: 2022/04/04 16:33:31 by ppiques          ###   ########.fr       */
+/*   Updated: 2022/04/06 13:57:47 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	mutex_init(t_args *args)
 	int	i;
 
 	i = 0;
-	while (i++ < args->philo_nbr)
-		args->forks[i] = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+	while (i < args->philo_nbr)
+		args->forks[i++] = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	args->eating = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	args->printing = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	return (0);
@@ -77,7 +77,7 @@ int	philosophers_init(t_args *args)
 	int	i;
 
 	i = args->philo_nbr - 1;
-	while (i < args->philo_nbr)
+	while (i >= 0)
 	{
 		args->philosophers[i].args = args;
 		args->philosophers[i].philo_id = i;

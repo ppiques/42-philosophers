@@ -54,12 +54,12 @@ void	*routine(void *temp_philosopher)
 	i = 0;
 	philo = (t_philo *)temp_philosopher;
 	args = philo->args;
-	if (philo->philo_id % 2)
+	if (philo->philo_id % 2 != 0)
 		usleep(15000);
 	while (args->death == 0)
 	{
 		meal(philo);
-		if (args->full)
+		if (args->full != 0)
 			break ;
 		print_action(args, philo->philo_id, "is sleeping");
 		sleeping(args->time_to_sleep, args);
