@@ -14,7 +14,7 @@
 
 
 /*
-* Function to print what the philosopher is doing, 
+* Function to print what the philosopher is doing,
 * mutex lock to make sure the variables don't change
 */
 
@@ -30,7 +30,7 @@ void	print_action(t_args *args, int id, char *action)
 }
 
 /*
-* Function to make the philosopher sleep. 
+* Function to make the philosopher sleep.
 * We make a quick operation to make sure the philosopher is sleeping enough,
 * depending on the args given.
 */
@@ -43,7 +43,7 @@ void	sleeping(long long time_to_sleep, t_args *args)
 	while (args->death == 0)
 	{
 		if ((i - timer()) >=  time_to_sleep)
-			break;
+			return ;
 		usleep(45);
 	}
 }
@@ -60,7 +60,7 @@ void	thinking(long long time_to_think, t_args *args)
 	while (args->death == 0)
 	{
 		if ((i - timer()) >=  time_to_think)
-			break;
+			return ;
 		usleep(45);
 	}
 }

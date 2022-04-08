@@ -13,7 +13,7 @@
 #include "philosophers.h"
 
 /*
-* Main function for the philosopher dinner. 
+* Main function for the philosopher dinner.
 * We assign a thread for each philosopher running the routine function.
 */
 
@@ -33,14 +33,15 @@ int	philosophing(t_args *args)
 			return (-1);
 		}
 		p[i++].last_meal = timer();
+		// printf("a-last.meal : %lli\n", p[i].last_meal);
 	}
-	check_death(args, args->philosophers);
+	nurse(args, args->philosophers);
 	thread_cleaner(args, p);
 	return (0);
 }
 
 /*
-* Function used by the thread of each philosopher. 
+* Function used by the thread of each philosopher.
 * This function makes them eat through the meal function,
 * and sleep or think when needed and while there is no death.
 */
@@ -54,17 +55,17 @@ void	*routine(void *temp_philosopher)
 	i = 0;
 	philo = (t_philo *)temp_philosopher;
 	args = philo->args;
-	if (philo->philo_id % 2 != 0)
-		usleep(15000);
+	// if (philo->philo_id % 2 != 0)
+		// usleep(15000);
 	while (args->death == 0)
 	{
 		meal(philo);
 		if (args->full != 0)
-			break ;
+			return ;
 		print_action(args, philo->philo_id, "is sleeping");
 		sleeping(args->time_to_sleep, args);
 		print_action(args, philo->philo_id, "is thinking");
 		i++;
 	}
-	return (NULL);
+	return ;
 }

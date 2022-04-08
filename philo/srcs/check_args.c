@@ -13,7 +13,7 @@
 #include "philosophers.h"
 
 /*
-* Function to check if there are enough arguments and they are numbers
+* Function to check if there are enough arguments and if they are actually numbers
 */
 
 int	check_args(int argc, const char **argv)
@@ -35,7 +35,7 @@ int	check_args(int argc, const char **argv)
 			if (ft_isdigit(argv[i][j]) == 1)
 			{
 				printf("Error : Invalid arguments\n");
-				return (1);
+				return (-1);
 			}
 			j++;
 		}

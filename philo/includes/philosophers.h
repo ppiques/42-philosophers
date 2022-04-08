@@ -24,8 +24,8 @@ typedef struct  s_philo
 	int			philo_id;
 	int			right_fork;
 	int			left_fork;
-	int			last_meal;
 	int			fed;
+	long long int			last_meal;
 	struct s_args		*args;
 }				t_philo;
 
@@ -60,8 +60,10 @@ void		sleeping(long long time_to_sleep, t_args *args);
 int			check_args(int argc, const char **argv);
 
 // cleaner.c
-void		check_death(t_args *a, t_philo *p);
 void		thread_cleaner(t_args *args, t_philo *philo);
+
+// nurse.c
+void		nurse(t_args *a, t_philo *p);
 
 // parsing.c
 int			global_args_init(const char **argv, t_args *args);

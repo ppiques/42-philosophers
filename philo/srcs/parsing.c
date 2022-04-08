@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppiques <ppiques@students.42.fr>           +#+  +:+       +#+        */
+/*   By: ppiques <ppiques@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 15:22:29 by ppiques           #+#    #+#             */
-/*   Updated: 2022/04/06 13:57:47 by ppiques          ###   ########.fr       */
+/*   Updated: 2022/04/08 16:33:14 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,6 @@ int	global_args_init(const char **argv, t_args *args)
 		return (-1);
 	mutex_init(args);
 	philosophers_init(args);
-	return (0);
-}
-
-/*
-* This function checks that the arguments given are actually usable
-* Please note that the program has a limit of 200 philosophers
-*/
-
-int	check_global_args(t_args *args)
-{
-	if (args->philo_nbr <= 0 || args->time_to_die < 0
-		|| args->time_to_eat < 0 || args->time_to_sleep < 0
-		|| args->optional == 0 || args->philo_nbr > 200)
-	{
-		printf("Error : Invalid arguments\n");
-		return (-1);
-	}
 	return (0);
 }
 
@@ -86,6 +69,23 @@ int	philosophers_init(t_args *args)
 		args->philosophers[i].fed = 0;
 		args->philosophers[i].last_meal = 0;
 		i--;
+	}
+	return (0);
+}
+
+/*
+* This function checks that the arguments given are actually usable
+* Please note that the program has a limit of 200 philosophers
+*/
+
+int	check_global_args(t_args *args)
+{
+	if (args->philo_nbr <= 0 || args->time_to_die < 0
+		|| args->time_to_eat < 0 || args->time_to_sleep < 0
+		|| args->optional == 0 || args->philo_nbr > 200)
+	{
+		printf("Error : Invalid arguments\n");
+		return (-1);
 	}
 	return (0);
 }

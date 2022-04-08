@@ -16,11 +16,11 @@ int	main(int argc, const char **argv)
 {
 	t_args	args;
 
-	if (check_args(argc, argv) == 1)
+	if (check_args(argc, argv) == -1)
 		return (1);
 	if (global_args_init(argv, &args) == -1)
 		return (1);
-	printf("global_args_init done\n"); // Y'a un soucis on atteint pas la
+	printf("global_args_init done\n");
 	philosophing(&args);
 	return (0);
 }
