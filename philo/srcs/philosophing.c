@@ -6,7 +6,7 @@
 /*   By: ppiques <ppiques@students.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:06:37 by ppiques           #+#    #+#             */
-/*   Updated: 2022/04/04 15:06:37 by ppiques          ###   ########.fr       */
+/*   Updated: 2022/04/10 20:13:05 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int	philosophing(t_args *args)
 {
-	int	i;
+	int		i;
 	t_philo	*p;
 
 	i = 0;
@@ -54,10 +54,11 @@ void	*routine(void *temp_philosopher)
 	philo = (t_philo *)temp_philosopher;
 	args = philo->args;
 	if (philo->philo_id % 2 != 0)
-		usleep(15000);
+		usleep(13950);
 	while (args->death == 0)
 	{
 		meal(philo);
+		philo->fed++;
 		if (args->full == 1)
 			return (NULL);
 		post_meal(args, philo);

@@ -6,7 +6,7 @@
 /*   By: ppiques <ppiques@students.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:23:20 by ppiques           #+#    #+#             */
-/*   Updated: 2022/04/04 16:23:20 by ppiques          ###   ########.fr       */
+/*   Updated: 2022/04/10 20:13:41 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 /*
 * Once we're done, this is a cleanup function to make sure
-* all the threads are done and the mutexes are destroyed before the program ends.
+* all the threads are done and the mutexes are destroyed
+* before the program ends.
 */
 
 void	thread_cleaner(t_args *args, t_philo *philo)
@@ -24,9 +25,13 @@ void	thread_cleaner(t_args *args, t_philo *philo)
 
 	i = 0;
 	j = 0;
-	while (i++ < args->philo_nbr)
+	(void)philo;
+	while (i < args->philo_nbr)
+	{
 		pthread_join(philo[i].thread_id, NULL);
-	while (j++ < args->philo_nbr)
+		i++;
+	}
+	while (j++ < args->philo_nbr - 1)
 		pthread_mutex_destroy(&(args->forks[j]));
 	pthread_mutex_destroy(&(args->eating));
 	pthread_mutex_destroy(&(args->printing));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nurse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppiques <ppiques@students.42.fr>           +#+  +:+       +#+        */
+/*   By: ppiques <ppiques@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:01:18 by ppiques           #+#    #+#             */
-/*   Updated: 2022/04/09 16:07:27 by ppiques          ###   ########.fr       */
+/*   Updated: 2022/04/10 19:57:21 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	nurse(t_args *args, t_philo *philo)
 			pthread_mutex_lock(&(args->eating));
 			if ((timer() - philo[i].last_meal) > args->time_to_die)
 			{
-				print_action(args, i, "died");
+				print_action(args, philo[i].philo_id, "died");
 				args->death = 1;
 			}
 			pthread_mutex_unlock(&(args->eating));

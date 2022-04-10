@@ -13,7 +13,8 @@
 #include "philosophers.h"
 
 /*
-* Function to check if there are enough arguments and if they are actually numbers
+* Function to check if there are enough
+* arguments and if they are actually numbers
 */
 
 int	check_args(int argc, const char **argv)

@@ -16,14 +16,16 @@
 * Function to get current time in milliseconds
 */
 
-long long int   timer(void)
+long long int	timer(void)
 {
-    struct timeval	time;
+	struct timeval	tv;
+	long long int	time;
 
-	if (gettimeofday(&time, NULL) != 0)
+	if (gettimeofday(&tv, NULL) != 0)
 	{
 		printf("Error : gettimeofday function failed\n");
 		return (-1);
 	}
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	return (time);
 }

@@ -6,7 +6,7 @@
 #    By: ppiques <ppiques@students.42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 10:22:05 by ppiques           #+#    #+#              #
-#    Updated: 2022/03/21 10:22:05 by ppiques          ###   ########.fr        #
+#    Updated: 2022/04/10 19:43:26 by ppiques          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ ft_isdigit.c ft_atoi.c
 
 cc = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 LIBS = -lpthread
 IFLAGS = $(foreach dir, $(INC_DIR), -I $(dir))
 
