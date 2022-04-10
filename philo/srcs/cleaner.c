@@ -28,5 +28,6 @@ void	thread_cleaner(t_args *args, t_philo *philo)
 		pthread_join(philo[i].thread_id, NULL);
 	while (j++ < args->philo_nbr)
 		pthread_mutex_destroy(&(args->forks[j]));
+	pthread_mutex_destroy(&(args->eating));
 	pthread_mutex_destroy(&(args->printing));
 }

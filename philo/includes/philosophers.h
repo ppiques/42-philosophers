@@ -36,8 +36,8 @@ typedef struct	s_args
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	optional;
-	int	death;
 	int	full;
+	int	death;
 	long long int	startup_time;
 	pthread_mutex_t	printing;
 	pthread_mutex_t	eating;
@@ -53,6 +53,7 @@ long int	ft_atoi(const char *str);
 // actions.c
 void		print_action(t_args *args, int id, char *action);
 void		meal(t_philo *philo);
+void		post_meal(t_args *args, t_philo *philo);
 void		thinking(long long time_to_think, t_args *args);
 void		sleeping(long long time_to_sleep, t_args *args);
 

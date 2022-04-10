@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nurse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppiques <ppiques@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ppiques <ppiques@students.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:01:18 by ppiques           #+#    #+#             */
-/*   Updated: 2022/04/08 16:14:10 by ppiques          ###   ########.fr       */
+/*   Updated: 2022/04/09 16:07:27 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,31 @@
 * We check if any philo is dead, or if the optional argument has been met.
 */
 
-void	nurse(t_args *a, t_philo *p)
+void	nurse(t_args *args, t_philo *philo)
 {
 	int	i;
 
-	while (a->full == 0)
+	while (args->full == 0)
 	{
 		i = 0;
-		while (i++ < a->philo_nbr && a->death == 0)
+		while (i < args->philo_nbr && args->death == 0)
 		{
-			pthread_mutex_lock(&(a->eating));
-			if ((timer() - p[i].last_meal) > a->time_to_die)
+			pthread_mutex_lock(&(args->eating));
+			if ((timer() - philo[i].last_meal) > args->time_to_die)
 			{
-				printf("timer : %lli, last.meal : %lli\n", timer(), p[i].last_meal); // soucis ici, last-meal vaut 0
-				printf("time to die : %i\n", a->time_to_die);
-				print_action(a, i, "died");
-				a->death = 1;
+				print_action(args, i, "died");
+				args->death = 1;
 			}
-			pthread_mutex_unlock(&(a->eating));
+			pthread_mutex_unlock(&(args->eating));
 			usleep(90);
-		}
-		if (a->death == 1)
-			break ;
-		i = 0;
-		while (i < a->philo_nbr && p[i].fed >= a->optional && a->optional != -1)
 			i++;
-		if (i == a->philo_nbr)
-			a->full = 1;
+		}
+		if (args->death == 1)
+			return ;
+		i = 0;
+		while (i < args->philo_nbr && philo[i].fed >= args->optional)
+			i++;
+		if (i == args->philo_nbr && args->optional != -1)
+			args->full = 1;
 	}
 }

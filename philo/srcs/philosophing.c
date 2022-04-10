@@ -32,8 +32,8 @@ int	philosophing(t_args *args)
 			printf("Error : Thread creation error\n");
 			return (-1);
 		}
-		p[i++].last_meal = timer();
-		// printf("a-last.meal : %lli\n", p[i].last_meal);
+		p[i].last_meal = timer();
+		i++;
 	}
 	nurse(args, args->philosophers);
 	thread_cleaner(args, p);
@@ -48,24 +48,19 @@ int	philosophing(t_args *args)
 
 void	*routine(void *temp_philosopher)
 {
-	int	i;
 	t_args	*args;
 	t_philo	*philo;
 
-	i = 0;
 	philo = (t_philo *)temp_philosopher;
 	args = philo->args;
-	// if (philo->philo_id % 2 != 0)
-		// usleep(15000);
+	if (philo->philo_id % 2 != 0)
+		usleep(15000);
 	while (args->death == 0)
 	{
 		meal(philo);
-		if (args->full != 0)
-			return ;
-		print_action(args, philo->philo_id, "is sleeping");
-		sleeping(args->time_to_sleep, args);
-		print_action(args, philo->philo_id, "is thinking");
-		i++;
+		if (args->full == 1)
+			return (NULL);
+		post_meal(args, philo);
 	}
-	return ;
+	return (NULL);
 }

@@ -20,7 +20,6 @@ int	main(int argc, const char **argv)
 		return (1);
 	if (global_args_init(argv, &args) == -1)
 		return (1);
-	printf("global_args_init done\n");
 	philosophing(&args);
 	return (0);
 }

@@ -26,7 +26,7 @@ int	check_args(int argc, const char **argv)
 	if ((argc < 5) || (argc > 6))
 	{
 		printf("Error : Invalid number of arguments\n");
-		return (1);
+		return (-1);
 	}
 	while (argv[i])
 	{

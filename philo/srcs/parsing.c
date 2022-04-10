@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppiques <ppiques@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ppiques <ppiques@students.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 15:22:29 by ppiques           #+#    #+#             */
-/*   Updated: 2022/04/08 16:33:14 by ppiques          ###   ########.fr       */
+/*   Updated: 2022/04/09 11:31:03 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	philosophers_init(t_args *args)
 	while (i >= 0)
 	{
 		args->philosophers[i].args = args;
-		args->philosophers[i].philo_id = i;
+		args->philosophers[i].philo_id = i + 1;
 		args->philosophers[i].right_fork = (i + 1) % args->philo_nbr;
 		args->philosophers[i].left_fork = i;
 		args->philosophers[i].fed = 0;

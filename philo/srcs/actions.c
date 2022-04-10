@@ -42,7 +42,7 @@ void	sleeping(long long time_to_sleep, t_args *args)
 	i = timer();
 	while (args->death == 0)
 	{
-		if ((i - timer()) >=  time_to_sleep)
+		if ((timer() - i) >=  time_to_sleep)
 			return ;
 		usleep(45);
 	}
@@ -59,7 +59,7 @@ void	thinking(long long time_to_think, t_args *args)
 	i = timer();
 	while (args->death == 0)
 	{
-		if ((i - timer()) >=  time_to_think)
+		if ((timer() - i) >=  time_to_think)
 			return ;
 		usleep(45);
 	}
@@ -90,4 +90,9 @@ void	meal(t_philo *philo)
 	pthread_mutex_unlock(&(args->forks[philo->left_fork]));
 }
 
-
+void	post_meal(t_args *args, t_philo *philo)
+{
+		print_action(args, philo->philo_id, "is sleeping");
+		sleeping(args->time_to_sleep, args);
+		print_action(args, philo->philo_id, "is thinking");
+}
