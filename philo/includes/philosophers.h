@@ -41,6 +41,8 @@ typedef struct s_args
 	long long int	startup_time;
 	pthread_mutex_t	printing;
 	pthread_mutex_t	eating;
+	pthread_mutex_t	dead;
+	pthread_mutex_t	mutex_full;
 	pthread_mutex_t	forks[200];
 	t_philo			philosophers[200];
 
@@ -49,12 +51,13 @@ typedef struct s_args
 //  utils
 int				ft_isdigit(int c);
 long int		ft_atoi(const char *str);
+int				death_checker(t_args *args);
+int				full_checker(t_args *args);
 
 // actions.c
 void			print_action(t_args *args, int id, char *action);
 void			meal(t_philo *philo);
 void			post_meal(t_args *args, t_philo *philo);
-void			waiting(long long time_to_wait, t_args *args);
 
 // check_args.c
 int				check_args(int argc, const char **argv);
@@ -81,5 +84,6 @@ void			*alone(void *temp_philosopher);
 // timer.c
 long long int	timer(void);
 void			ft_usleep(t_args *args);
+void			waiting(long long time_to_wait, t_args *args);
 
 #endif

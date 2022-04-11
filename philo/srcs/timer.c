@@ -42,3 +42,21 @@ void	ft_usleep(t_args *args)
 		usleep(10);
 	}
 }
+
+/*
+* Function used to make the philosopher
+* wait enough time for his current activity to end.
+*/
+
+void	waiting(long long time_to_wait, t_args *args)
+{
+	long long int	i;
+
+	i = timer();
+	while (death_checker(args) == 0)
+	{
+		if ((timer() - i) >= time_to_wait)
+			return ;
+		usleep(45);
+	}
+}

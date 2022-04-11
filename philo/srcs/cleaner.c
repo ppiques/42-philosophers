@@ -35,4 +35,6 @@ void	thread_cleaner(t_args *args, t_philo *philo)
 		pthread_mutex_destroy(&(args->forks[j]));
 	pthread_mutex_destroy(&(args->eating));
 	pthread_mutex_destroy(&(args->printing));
+	pthread_mutex_destroy(&(args->dead));
+	pthread_mutex_destroy(&(args->mutex_full));
 }

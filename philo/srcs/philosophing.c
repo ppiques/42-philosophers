@@ -27,13 +27,13 @@ int	philosophing(t_args *args)
 	args->startup_time = timer();
 	while (i < args->philo_nbr)
 	{
+		p[i].last_meal = timer();
 		if (pthread_create(&(p[i].thread_id), NULL, routine, &(p[i])) != 0)
 		{
 			printf("Error : Thread creation error\n");
 			thread_cleaner(args, p);
 			return (-1);
 		}
-		p[i].last_meal = timer();
 		i++;
 	}
 	nurse(args, args->philosophers);
@@ -56,11 +56,13 @@ void	*routine(void *temp_philosopher)
 	args = philo->args;
 	if (philo->philo_id % 2 != 0)
 		ft_usleep(args);
-	while (args->death == 0)
+	while (death_checker(args) == 0)
 	{
 		meal(philo);
+		pthread_mutex_lock(&(args->eating));
 		philo->fed++;
-		if (args->full == 1)
+		pthread_mutex_unlock(&(args->eating));
+		if (full_checker(args) == 1)
 			return (NULL);
 		post_meal(args, philo);
 	}

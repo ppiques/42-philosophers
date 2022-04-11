@@ -27,7 +27,7 @@ vpath %.c $(SRCS_PATH)
 
 SRCS = philosophers.c  philosophing.c check_args.c \
 parsing.c timer.c actions.c cleaner.c nurse.c \
-ft_isdigit.c ft_atoi.c
+ft_isdigit.c ft_atoi.c ft_should_run.c
 
 cc = gcc
 

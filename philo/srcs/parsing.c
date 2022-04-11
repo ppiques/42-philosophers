@@ -6,7 +6,7 @@
 /*   By: ppiques <ppiques@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 15:22:29 by ppiques           #+#    #+#             */
-/*   Updated: 2022/04/11 14:53:37 by ppiques          ###   ########.fr       */
+/*   Updated: 2022/04/11 22:39:56 by ppiques          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	mutex_init(t_args *args)
 		args->forks[i++] = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	args->eating = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	args->printing = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+	args->dead = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+	args->mutex_full = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	return (0);
 }
 
