@@ -31,7 +31,7 @@ ft_isdigit.c ft_atoi.c
 
 cc = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 LIBS = -lpthread
 IFLAGS = $(foreach dir, $(INC_DIR), -I $(dir))
 

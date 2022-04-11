@@ -54,8 +54,7 @@ long int		ft_atoi(const char *str);
 void			print_action(t_args *args, int id, char *action);
 void			meal(t_philo *philo);
 void			post_meal(t_args *args, t_philo *philo);
-void			thinking(long long time_to_think, t_args *args);
-void			sleeping(long long time_to_sleep, t_args *args);
+void			waiting(long long time_to_wait, t_args *args);
 
 // check_args.c
 int				check_args(int argc, const char **argv);
@@ -65,6 +64,7 @@ void			thread_cleaner(t_args *args, t_philo *philo);
 
 // nurse.c
 void			nurse(t_args *a, t_philo *p);
+void			nurse_funeral(t_args *args, t_philo *philo);
 
 // parsing.c
 int				global_args_init(const char **argv, t_args *args);
@@ -75,8 +75,11 @@ int				philosophers_init(t_args *args);
 // philosophing.c
 int				philosophing(t_args *args);
 void			*routine(void *temp_philosopher);
+int				lone_dinner(t_args *args);
+void			*alone(void *temp_philosopher);
 
 // timer.c
 long long int	timer(void);
+void			ft_usleep(t_args *args);
 
 #endif

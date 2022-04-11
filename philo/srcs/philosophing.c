@@ -30,6 +30,7 @@ int	philosophing(t_args *args)
 		if (pthread_create(&(p[i].thread_id), NULL, routine, &(p[i])) != 0)
 		{
 			printf("Error : Thread creation error\n");
+			thread_cleaner(args, p);
 			return (-1);
 		}
 		p[i].last_meal = timer();
@@ -54,7 +55,7 @@ void	*routine(void *temp_philosopher)
 	philo = (t_philo *)temp_philosopher;
 	args = philo->args;
 	if (philo->philo_id % 2 != 0)
-		usleep(13950);
+		ft_usleep(args);
 	while (args->death == 0)
 	{
 		meal(philo);
@@ -62,6 +63,51 @@ void	*routine(void *temp_philosopher)
 		if (args->full == 1)
 			return (NULL);
 		post_meal(args, philo);
+	}
+	return (NULL);
+}
+
+/*
+* This function is for the edge case of a lone philosopher.
+* We only create a single thread using the alone function.
+*/
+
+int	lone_dinner(t_args *args)
+{
+	t_philo	*philo;
+
+	philo = args->philosophers;
+	args->startup_time = timer();
+	if (pthread_create(&(philo[0].thread_id), NULL, alone, &(philo[0])) != 0)
+	{
+		printf("Error : Thread creation error\n");
+		thread_cleaner(args, philo);
+		return (-1);
+	}
+	thread_cleaner(args, philo);
+	return (0);
+}
+
+/*
+* This is the function for the lone philosopher thread. As he is alone,
+* there is only one fork. As such, he can't eat, and dies once the time_to_die
+* has been reached.
+*/
+
+void	*alone(void *temp_philosopher)
+{
+	t_args	*args;
+	t_philo	*philo;
+
+	philo = (t_philo *)temp_philosopher;
+	args = philo->args;
+	while (1)
+	{
+		if ((timer() - args->startup_time) > args->time_to_die)
+		{
+			print_action(args, philo[0].philo_id, "died");
+			return (NULL);
+		}
 	}
 	return (NULL);
 }

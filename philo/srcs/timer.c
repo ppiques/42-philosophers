@@ -29,3 +29,16 @@ long long int	timer(void)
 	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (time);
 }
+
+/*
+* Function to make sure uneven philosophers start their thread
+* after even philosophers finished their meals.
+*/
+
+void	ft_usleep(t_args *args)
+{
+	while ((timer() - args->startup_time) < args->time_to_eat)
+	{
+		usleep(10);
+	}
+}

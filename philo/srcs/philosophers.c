@@ -20,6 +20,11 @@ int	main(int argc, const char **argv)
 		return (1);
 	if (global_args_init(argv, &args) == -1)
 		return (1);
+	if (args.philo_nbr == 1)
+	{
+		lone_dinner(&args);
+		return (0);
+	}
 	philosophing(&args);
 	return (0);
 }
